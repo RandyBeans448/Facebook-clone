@@ -1,0 +1,420 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(240, 240, 240);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+/* Login */
+
+.login-wrapper {
+  position: relative;
+  top: 10vh;
+
+}
+
+.login-innner-wrap {
+  margin: 0 auto;
+  height: 45vh;
+  width: 45vh;
+}
+
+.login-left-side {
+  height: 50vh;
+  width: 50vh;
+  text-align: left;
+}
+
+.login-title {
+  font-size: 9.5vh;
+  color: #4267B2;
+}
+
+.login-p {
+  font-size: 1.5vh;
+}
+
+.login-right-side {
+  width: 50vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-right-side-inner-container {
+  position: relative;
+  top: 50%;
+}
+
+.login-modal-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.login-input {
+  height: 4vh;
+  width: 40vh;
+  margin: 1vh;
+}
+
+.login-button {
+  width: 41vh;
+  height: 4.5vh;
+  background-color: #4267B2;
+  border: none;
+  color: white;
+  font-size: 2vh;
+  cursor: pointer;
+} 
+
+.login-link-wrapper {
+  margin: 0 auto;
+  margin-top: 1.5vh;
+  height: 4vh;
+  width: 41vh;
+  background-color: #4267B2;
+}
+
+.login-create-account-link {
+  position: relative;
+  top: 0.5vh;
+  margin: 1vh;
+  padding: 2vh;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Create account */
+
+.create-login-title {
+  font-size: 6vh;
+  color: #4267B2;
+}
+
+/* Header bar */
+
+.header {
+  display: flex;
+  background-color: #4267B2;
+  height: 5vh;
+  width: screen;
+  padding: 1vh;
+  border-bottom: solid;
+  border-color: #2e497e;
+  border-width: thin;
+  margin-bottom: 2.5vh;
+}
+
+.input-search-container {
+  margin-left: 1vh;
+  margin-right: 1vh;
+  position: relative;
+  top: 12.5%;
+}
+
+.input-search {
+  padding: 1vh;
+  width: 60vh;
+  border: none;
+  border-radius: 2vh;
+}
+
+.facebook-logo {
+  width: 5vh;
+  margin-left: 1vh;
+  margin-right: 1vh;
+}
+
+.header-icons-container {
+  display: flex;
+  margin-left: auto;
+  position: relative;
+  top: 20%;
+}
+
+.header-icons {
+  color: white;
+  margin-right: 4vh;
+}
+
+/* Contacts */
+
+.contact-container{
+  position: relative;
+  bottom: 18vh;
+  height: 100vh;
+  width: 20%;
+  margin-left: auto;
+}
+
+.contact-header-wrapper {
+  display: flex;
+  color: black;
+}
+
+.contacts-title {
+  font-size: 1.75vh;
+  margin-left: 1.5vh;
+  margin-right: 5vh;
+}
+
+.contact-header-search-wrapper {
+
+}
+
+.contact-header-search {
+  position: relative;
+  top: 25%;
+  padding: 1vh;
+  height: 1vh;
+  width: 20vh;
+  margin-left: 1vh;
+  border: none;
+}
+
+.contacts-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.contacts-list-item {
+  background-color: rgb(255, 255, 255);
+  width: 30vh;
+}
+
+.contacts-list-name-wrapper {
+  position: relative;
+  top: 50%;
+}
+
+/* Main feed */
+
+.feed-post-box-container {
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  padding: 2vh;
+  width: 70vh;
+  height: 12vh;
+  border: none;
+  border-radius: 1vh;
+}
+
+.feed-post-textarea {
+  min-width: 70vh;
+  max-width: 70vh;
+  min-height: 5vh;
+  max-height: 5vh;
+  resize: none;
+  border: none;
+  border-radius: 1vh;
+}
+
+.feed-post-upload-button {
+  background-color: #4267B2;
+  width: 21vh;
+  margin-right: 10vh;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin: 2vh;
+}
+
+.btn {
+  color: rgb(255, 255, 255);
+  background-color: #4267B2;
+  border: none;
+  padding: 1vh;
+  border-radius: 1vh;
+  font-size: 1.75vh;
+  width: 15vh;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 1vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+/* Profile */
+
+.profile-top {
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  padding: 2vh;
+  width: 90%;
+  /* height: 20vh; */
+  border: none;
+  border-radius: 1vh;
+}
+
+.profile-picture-name-container {
+  margin: 0 auto;
+}
+
+.profile-picture {
+  display: inline-block;
+  width: 50%;
+  border: solid;
+  border-width: thin;
+  border-radius: 50%;
+  height: 20vh;
+  width: 20vh;
+  background-color: #bbb;
+  border-radius: 50%;
+}
+
+.profile-name-wrapper {
+  
+}
+
+.profile-name {
+  font-size: 4.5vh;
+}
+
+.profile-line-break {
+  padding: 0.05vh;
+  background-color: rgb(204, 204, 204);
+}
+
+.profile-navigation-bar-wrapper {
+
+}
+
+.profile-navigation-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.profile-navigation-list-item {
+  display: inline-block;
+  margin: 0 2.5vh 0vh 2.5vh;
+}
+
+.profile-picture-container {
+  background-color: rgb(255, 255, 255);
+  height: 60vh;
+  width: 60vh;
+  border: none;
+  border-radius: 1vh;
+}
+
+.profile-left-and-right-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.profile-left-side {
+
+}
+
+.profile-right-side {
+ margin-top: 2vh;
+}
+
+.profile-post-box-container {
+  /* margin: 0 auto; */
+  background-color: rgb(255, 255, 255);
+  padding: 2vh;
+  width: 90vh;
+  height: 14vh;
+  border: none;
+  border-radius: 1vh;
+}
+
+.profile-post-textarea {
+  margin-bottom: 2vh;
+  min-width: 70vh;
+  max-width: 70vh;
+  min-height: 5vh;
+  max-height: 5vh;
+  resize: none;
+  border: none;
+  border: solid;
+  border-color: #bbb;
+  border-width: thin;
+  border-radius: 1vh;
+}
+
+.profile-post-line-break {
+  width: 78%;
+  padding: 0.05vh;
+  margin: 0 auto;
+  background-color: rgb(204, 204, 204);
+}
+
+.profile-post-upload-button {
+  background-color: #4267B2;
+  width: 21vh;
+  margin-right: 10vh;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.profile-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin: 2vh;
+}
+
+.btn {
+  color: rgb(255, 255, 255);
+  background-color: #4267B2;
+  border: none;
+  padding: 1vh;
+  border-radius: 1vh;
+  font-size: 1.75vh;
+  width: 15vh;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 1vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.profile-upload-btn {
+  position: relative;
+  bottom: 1vh;
+  color: rgb(255, 255, 255);
+  background-color: #4267B2;
+  border: none;
+  border-radius: 1vh;
+  font-size: 3vh;
+  width: 3vh;
+  cursor: pointer;
+  
+}

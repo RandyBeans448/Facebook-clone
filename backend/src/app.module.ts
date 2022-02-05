@@ -3,9 +3,15 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FeedModule } from './feed/feed.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ConnectionsModule } from './connections/connections.module';
+import { PostsModule } from './posts/posts.module';
+import { ChatGateway } from './socket/chat.gateway';
+import { ConversationModule } from './conversation/conversation.module';
+import { MessagesModule } from './messages/messages.module';
+import { PhotoEntity } from './photos/models/photos.entity';
+import { AboutEntity } from './about/models/about.entity';
 
 @Module({
   imports: [
@@ -19,11 +25,26 @@ import { AuthModule } from './auth/auth.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
+      entities: [
+        UsersModule,
+        AuthModule,
+        AboutEntity,
+        PostsModule,
+        PhotoEntity,
+        ConnectionsModule,
+        ConversationModule,
+        MessagesModule]
     }),
     UsersModule,
     AuthModule,
+    AboutEntity,
+    PostsModule,
+    PhotoEntity,
+    ConnectionsModule,
+    ConversationModule,
+    MessagesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatGateway],
 })
 export class AppModule {}

@@ -1,15 +1,19 @@
+import { ConnectionInterface } from "src/connections/models/connections.interface";
+import { PostsInterface } from "src/posts/models/posts.interface";
+import { ConversationInterface } from "src/conversation/models/conversation.interface";
+import { PhotoInterface } from "src/photos/models/photos.interface";
+import { AboutInterface } from "src/about/models/about.interface";
+
 export interface UsersInterface {
     id?: number,
-    fistName?: string,
-    lastName?: string,
-    emailAddress?: string,
-    password?: string,
+    firstName: string,
+    lastName: string,
+    username: string,
+    password: string,
     image?: string,
     background?: string,
-    jobTitle?: string,
-    about?: string,
-    skills?: string[],
-    connections?: string[],
-    experience?: string[],
-    education?: string[]
+    about?: AboutInterface[],
+    posts?: PostsInterface[],
+    connections?: ConnectionInterface[],
+    conversations?: ConversationInterface[],
 }
