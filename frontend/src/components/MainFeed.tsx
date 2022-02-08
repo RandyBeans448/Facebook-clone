@@ -28,13 +28,13 @@ export const MainFeed: React.FC = () => {
         axios
           .get(api, {
             headers: {
-              Authorization: jwt,
+              Authorization: 'Bearer ' + jwt,
               "Content-Type": "application/json",
               "Cache-Control": "no-cache",
             },
           })
           .then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+            console.log(res.data)
           });
       }, [id]);
 
@@ -76,6 +76,9 @@ export const MainFeed: React.FC = () => {
                         <button className="btn">Post</button>
                     </div>
                 </form>
+                <div>
+                  
+                </div>
             </div>
             <div className="contact-container"><Contacts/></div>
         </div>

@@ -6,6 +6,18 @@ import { UsersEntity } from "src/users/models/users.entity";
 export class PostsEntity {
     @PrimaryGeneratedColumn()
     id: number;
+    
+    @IsEmpty()
+    @Column({nullable: true})
+    profilePicture: string;
+
+    @IsNotEmpty()
+    @Column({nullable: true})
+    firstname: string;
+
+    @IsNotEmpty()
+    @Column({nullable: true})
+    lastname: string;
 
     @IsNotEmpty()
     @Column({nullable: false})

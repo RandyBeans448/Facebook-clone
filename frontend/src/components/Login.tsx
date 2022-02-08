@@ -27,11 +27,6 @@ const submit = () => {
       localStorage.setItem("jwt", JSON.stringify(res.data.access_token));
       localStorage.setItem("user", JSON.stringify(res.data.user));
       navigate(`/feed/${res.data.user.id}`,)
-    //   setUserState(res.data.user);
-    // navigate.push({
-    //     pathname: `/user/account/${res.data.user._id}`,
-    //   });
-    
     })
     .catch((error) => setErrors(error.response.data.error));
 };

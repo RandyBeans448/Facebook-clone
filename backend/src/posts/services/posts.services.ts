@@ -15,10 +15,18 @@ export class PostsService {
         private readonly postsRespository: Repository<PostsEntity>
     ) {}
 
-    async createPost(user: UsersInterface, posts: PostsInterface): Promise<PostsInterface> {
+    async createPost(user: UsersInterface, image: string, posts: PostsInterface): Promise<PostsInterface> {
         const currentUser = user;
-        const newPost = posts;
-        newPost.user = currentUser;
+        const newPost = {
+            profilePicture: posts.profilePicture,
+            firstname: posts.firstname,
+            lastname: posts.lastname,
+            desc: posts.desc,
+            image: image,
+            user: currentUser
+        };
+        
+        // newPost.user = currentUser;
         if (!newPost) {
             throw new Error;
         } else {
@@ -27,7 +35,9 @@ export class PostsService {
     }
 
     async getPosts() {
-         return await this.postsRespository.find();
+        console.log('finding posts')
+        const allPosts = await this.postsRespository.find();
+         return allPosts;
     }   
 
     getPostsId(id: number): Observable<PostsInterface> {

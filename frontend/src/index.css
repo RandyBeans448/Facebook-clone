@@ -277,15 +277,17 @@ ul {
 }
 
 .profile-picture {
-  display: inline-block;
-  width: 50%;
-  border: solid;
-  border-width: thin;
+  position: relative;
+  object-fit: cover;
+  object-position: 20% 10%; /* try 20px 10px */ 
+  top: 1vh;
+  border: none;
   border-radius: 50%;
-  height: 20vh;
-  width: 20vh;
-  background-color: #bbb;
-  border-radius: 50%;
+  min-width:20vh;
+  max-width: 20vh;
+  min-height: 20vh;
+  max-height: 20vh;
+  margin: auto;
 }
 
 .profile-name-wrapper {
@@ -293,7 +295,7 @@ ul {
 }
 
 .profile-name {
-  font-size: 4.5vh;
+  font-size: 4vh;
 }
 
 .profile-line-break {
@@ -322,6 +324,8 @@ ul {
   border: none;
   border-radius: 1vh;
 }
+
+
 
 .profile-left-and-right-container {
   display: flex;

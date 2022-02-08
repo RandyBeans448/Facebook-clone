@@ -2,16 +2,13 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import * as csurf from 'csurf';
 import * as session from 'express-session';
+import * as express from 'express';
+import { join } from 'path';
 
 import { AppModule } from './app.module';
 import { Transport } from '@nestjs/microservices';
 
-const mircoserivceOptions = {
-  transport: Transport.REDIS,
-  options: {
-    url: 'redis://localhost:6379'
-  }
-}
+
 
 function getCorsArray(list: string): string[] {
   if (!list) {
@@ -29,6 +26,7 @@ async function bootstrap() {
   // app.enableCors();
   // app.use(csurf());
   app.useGlobalPipes(new ValidationPipe());
+  app.use('/public', express.static(join(__dirname, '..', 'public'))); 
   app.use(
     session({
       secret: 'my-secret',

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Header } from "./Header";
@@ -9,13 +9,6 @@ import axios, {  AxiosResponse, Method} from 'axios';
 import config from "../config";
 
 const FormData = require('form-data');
-
-interface AxiosRequestConfig {
-    method: Method;
-    url: string,
-    headers: any,
-    data: any
-}
 
 export const Profile: React.FC = () => {
 
@@ -45,9 +38,12 @@ export const Profile: React.FC = () => {
     const postSubmit = async () => {
         
         const formData:any = new FormData();
-        formData.append("desc", desc);
-        formData.append("image", image)
-        console.log(formData, "form data");
+        formData.append('profilePicture', localUser.image);
+        formData.append('firstname', localUser.firstName);
+        formData.append('lastname', localUser.lastName);
+        formData.append('desc', desc);
+        formData.append('image', image)
+        console.log(formData, 'form data');
 
         const post = {
             desc: desc,
@@ -61,15 +57,6 @@ export const Profile: React.FC = () => {
                 console.log(entry)
             }
 
-            // const options: AxiosRequestConfig = {
-            //     method: "POST",
-            //     url: api,
-            //     headers: { "Content-Type": "multipart/form-data", Authorization: jwt, },
-            //     data: formData,
-            //   };
-            //   console.log(options)
-            // const response: AxiosResponse = await axios(options)
-            // console.log(response, "res")
 
         axios
           .post(
@@ -79,7 +66,7 @@ export const Profile: React.FC = () => {
                 headers: 
                     {   
                         "Content-Type": "multipart/form-data", 
-                        Authorization: jwt, 
+                        Authorization: 'Bearer ' + jwt, 
                     }
                 }
           )
@@ -105,13 +92,12 @@ export const Profile: React.FC = () => {
                     </div>
                     <div className="profile-picture-name-container">
                         <div className="profile-picture-wrapper">
-                            <img className="profile-picture"/>
+                            <img className="profile-picture" src={`http://localhost:5000/public/${localUser.image}`}/>
                       </div>
                         <div className="profile-name-wrapper">
                             <h3 className="profile-name"> {localUser.firstName} {localUser.lastName} </h3>
                         </div>
                     </div>
-                    
                     <div className="profile-line-break"></div>
                         <div className="profile-navigation-bar-wrapper">
                             <ul className="profile-navigation-list">

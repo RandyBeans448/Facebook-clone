@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Request, UseInterceptors, UploadedFile, UseGuards, Patch} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Request, UseInterceptors, UploadedFile, UseGuards, Patch, Req} from '@nestjs/common';
 import { IsNumberString } from 'class-validator';
 import { FileInterceptor, FileFieldsInterceptor, MulterModule } from '@nestjs/platform-express';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { saveImageToStorage } from '../image-helpers/image-storage';
+import { join } from 'path';
 
 import { UsersEntity } from '../models/users.entity';
 import { UsersInterface } from '../models/Users.interface';
@@ -18,6 +20,8 @@ import { PostsService } from 'src/posts/services/posts.services';
 import { AuthService } from 'src/auth/auth.service';
   
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { postsImageToStorage } from '../image-helpers/posts-image-storage';
+
 
 @Controller()
 export class UsersController {
@@ -46,18 +50,30 @@ export class UsersController {
 
     //Upload profile picture
     @UseGuards(JwtAuthGuard)
-    @Patch('upload/avatar/:id')
-    @UseInterceptors(FileInterceptor('image', {dest: './upload'}))
-    upload(@Param('id') id: number, @UploadedFile() image: string):Promise<UpdateResult> {
-        return this.usersSerivce.uploadAvatar(id, image);
+    @Patch('settings/:id')
+    @UseInterceptors(FileInterceptor('image', saveImageToStorage))
+    uploadAvatar(@Param('id') id: number, @UploadedFile() image: Express.Multer.File, @Request() req): Promise<UpdateResult> | {error: string} {
+        const fileName = image?.filename
+        console.log(fileName)
+        if (!fileName) {
+            return {error: 'File must be a png, jpeg, jgp'};
+        }  else {
+            return this.usersSerivce.uploadAvatar(id, fileName);
+        }   
     }
 
-    //Upload background picture   
+    //Upload background picture
     @UseGuards(JwtAuthGuard)
-    @Patch('upload/background/:id')
-    @UseInterceptors(FileInterceptor('image', {dest: './upload'}))
-    uploadBackground(@Param('id') id: number, @UploadedFile() background: string):Promise<UpdateResult> {
-        return this.usersSerivce.uploadBackground(id, background);
+    @Patch('settings/background/:id')
+    @UseInterceptors(FileInterceptor('image', saveImageToStorage))
+    uploadBackground(@Param('id') id: number, @UploadedFile() background: Express.Multer.File, @Request() req): Promise<UpdateResult> | {error: string} {
+        const fileName = background?.filename
+        console.log(fileName)
+        if (!fileName) {
+            return {error: 'File must be a png, jpeg, jgp'};
+        }  else {
+            return this.usersSerivce.uploadBackground(id, fileName);
+        }   
     }
 
     // //@UseGuards(JwtAuthGuard)
@@ -99,26 +115,38 @@ export class UsersController {
 
     //Posts relation
 
-    // @UseGuards(JwtAuthGuard)
-    // @Get('feed/:id')
-    // getUser(@Param(':id') id: number) {
-    //     return this.usersSerivce.getCurrentUser(id);
-    // }
+    @UseGuards(JwtAuthGuard)
+    @Get('feed/:id')
+    getUser(@Param(':id') id: number) {
+        return this.usersSerivce.getCurrentUser(id);
+    }
 
     @UseGuards(JwtAuthGuard)
     @Post('feed/:id')
-    async posts(@Param('id') id: number, user: UsersInterface, @Body() posts: PostsInterface): Promise<PostsInterface> {
+    @UseInterceptors(FileInterceptor('file', postsImageToStorage))
+    async createPostFromMainFeed(@Param('id') id: number, @UploadedFile() image: Express.Multer.File, @Body() posts: PostsInterface, @Request() req): Promise<PostsInterface | { error: string; }> {
+        const fileName = image?.filename
         const currentUser = await this.usersSerivce.getCurrentUser(id);
-        return this.postsService.createPost(currentUser, posts)
+        console.log(fileName)
+        if (!fileName) {
+            return {error: 'File must be a png, jpeg, jgp'};
+        }  else {
+            return this.postsService.createPost(currentUser, fileName, posts);
+        }   
     }
 
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Post('profile/:id')
-    @UseInterceptors(FileInterceptor('file', {}))
-    async createPostFromProfile(@Param('id') id: number, user: UsersInterface, @Body() posts: PostsInterface): Promise<PostsInterface> {
-        console.log()
+    @UseInterceptors(FileInterceptor('file', postsImageToStorage))
+    async createPostFromProfile(@Param('id') id: number, @UploadedFile() image: Express.Multer.File, @Request() req, @Body() posts: PostsInterface): Promise<PostsInterface | { error: string; }> {
+        const fileName = image?.filename
         const currentUser = await this.usersSerivce.getCurrentUser(id);
-        return this.postsService.createPost(currentUser, posts);
+        console.log(fileName)
+        if (!fileName) {
+            return {error: 'File must be a png, jpeg, jgp'};
+        }  else {
+            return this.postsService.createPost(currentUser, fileName, posts);
+        }   
     }
 
     @UseGuards(JwtAuthGuard)
